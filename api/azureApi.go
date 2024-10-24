@@ -9,12 +9,12 @@ import (
 )
 
 // AzureApi represents the Azure API structure holding credentials
-type AzureApi struct {
-    credentials *azure.AzureCredentials
+type AzureApiCaller struct {
+    Credentials *azure.AzureCredentials
 }
 
 // Makes a GET request to the given URL and returns the response body as []byte
-func (api *AzureApi) get(url string) ([]byte, error) {
+func (api *AzureApiCaller) get(url string) ([]byte, error) {
     client := &http.Client{}
 
     // Create the GET request
@@ -25,7 +25,7 @@ func (api *AzureApi) get(url string) ([]byte, error) {
 
     // Set request headers
     req.Header.Add("Accept", "application/json")
-    req.Header.Add("Authorization", basicAuth(api.credentials.Pat))
+    req.Header.Add("Authorization", basicAuth(api.Credentials.Pat))
 
     // Execute the request
     resp, err := client.Do(req)
