@@ -1,4 +1,4 @@
-module github.com/me-nata/AzureVariableGroup-Golang
+module github.com/me-nata/goazuredevops
 
 go 1.22.6
 

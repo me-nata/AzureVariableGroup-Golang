@@ -1,1 +1,1 @@
-# Get Variable Group With GO
+# Get Azure Variable Group with GO
