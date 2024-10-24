@@ -1,8 +1,10 @@
 package azure
 
 import (
-	"github.com/joho/godotenv"
+	"log"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 type AzureCredentials struct {
@@ -10,11 +12,17 @@ type AzureCredentials struct {
     Org string
 }
 
-func GetCredentials() (string, string) {
-    godotenv.Load()
+func GetCredentials() (AzureCredentials, error) {
+	// Load environment variables from .env file
+    err := godotenv.Load()
     
-    PAT := os.Getenv("PERSONAL_ACCESS_TOKEN")
-    ORG := os.Getenv("ORGANIZATION_NAME")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+		return AzureCredentials{}, err
+	}
+	
+	PAT := os.Getenv("PERSONAL_ACCESS_TOKEN")
+	ORG := os.Getenv("ORGANIZATION_NAME")
 
-    return PAT, ORG
+    return AzureCredentials{ PAT, ORG }, nil
 }
